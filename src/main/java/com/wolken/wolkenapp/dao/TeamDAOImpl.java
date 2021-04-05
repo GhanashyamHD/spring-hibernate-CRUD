@@ -52,7 +52,6 @@ public class TeamDAOImpl implements TeamDAO {
 //	}
 	@Override
 	public String addTeam(TeamDTO dto) {
-		// TODO Auto-generated method stub
 		try {
 			SessionFactory factory = bean.getObject();
 			Session session = factory.openSession();
@@ -68,18 +67,13 @@ public class TeamDAOImpl implements TeamDAO {
 
 	@Override
 	public String deleteTeamByName(String teamName) {
-		// TODO Auto-generated method stub
 		try {
 			SessionFactory factory = bean.getObject();
 			Session session = factory.openSession();
 			Transaction transaction = session.beginTransaction();
-			System.out.println("entering query");
 			Query query = session.getNamedQuery("delete");
-			System.out.println("out of named query");
 			query.setParameter("teamName", teamName);
-			System.out.println("out of setparam");
 			query.executeUpdate();
-			System.out.println("executeUpdate");
 			transaction.commit();
 			session.close();
 		} catch (Exception e) {
@@ -90,14 +84,12 @@ public class TeamDAOImpl implements TeamDAO {
 
 	@Override
 	public String updateCaptainByTeamName(String teamName, String captain) {
-		// TODO Auto-generated method stub
 		try {
 			SessionFactory factory = bean.getObject();
 			Session session = factory.openSession();
 			Transaction transaction = session.beginTransaction();
 			Query query = session
 					.createQuery("update TeamDTO dto set dto.captain = :captain where dto.teamName = :teamName");
-			System.out.println("dao named query");
 			query.setParameter("captain", captain);
 			query.setParameter("teamName", teamName);
 
@@ -107,24 +99,17 @@ public class TeamDAOImpl implements TeamDAO {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-
 		return "Data Updated";
 	}
 
 	@Override
 	public List<TeamDTO> getAllTeams() {
-		// TODO Auto-generated method stub
-		System.out.println("inside dao");
 		SessionFactory factory = bean.getObject();
 		Session session = factory.openSession();
 		Transaction transaction = session.beginTransaction();
 		Query query = session.getNamedQuery("selectall");
-
 		List<TeamDTO> teamslist = query.list();
 		session.close();
 		return teamslist;
-
-		// TODO: handle exception
-
 	}
 }

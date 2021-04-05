@@ -18,8 +18,6 @@ import com.wolken.wolkenapp.service.TeamService;
 @Component
 @RequestMapping("/")
 public class IplController {
-
-	
     @Autowired
 	TeamDAO dao;
 	@Autowired
@@ -51,16 +49,10 @@ public class IplController {
 	
 	@RequestMapping("/update.ghd")
 	public String updateTeamCaptainByTeamName(HttpServletRequest req) {
-		System.out.println("inside controller");
 		String newCaptainName= req.getParameter("newTeamCaptain");
-		System.out.println(newCaptainName);
 		String TeamNameToUpdate= req.getParameter("teamName");
-		System.out.println(TeamNameToUpdate);
 		String msg = service.validateAndUpdateCaptainByTeamName(newCaptainName, TeamNameToUpdate);
-		System.out.println("controller update");
 		req.setAttribute("msg", msg);
-
-		System.out.println("end of updateTeamCaptainByTeamName()");
 		return "home.jsp";
 	
 	}
